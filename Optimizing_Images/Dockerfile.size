@@ -1,0 +1,12 @@
+# slim means its a trimmed down version of node 22
+# alpine means is based on minimalistic linux distribution and has fewer security vulnerabilities
+FROM node:22-slim
+
+WORKDIR /app
+COPY package*.json .
+
+RUN npm i
+
+COPY index.js index.js
+
+CMD ["node", "index.js"]

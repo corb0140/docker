@@ -1,0 +1,14 @@
+# 1. Build our production bundle
+FROM node:22-alpine AS build
+WORKDIR /app
+COPY package*.json .
+# ci = clean install. It It completely deletes your node_modules folder and intsalls the exact versions listed in your package-lock.json.
+RUN npm ci
+
+COPY . .
+RUN npm run build
+
+# 2. Serve the bundle with an HTTP server
+FROM nginx:1.30.4
+
+COPY --from=build /app/build /usr/share/nginx/html

@@ -1,0 +1,6 @@
+some-large-file
+src/unwanted_file.js
+node_modules
+
+# Exclude all env files
+**/.env*

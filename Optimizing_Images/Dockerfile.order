@@ -1,0 +1,13 @@
+# slim means its a trimmed down version of node 22
+# alpine means is based on minimalistic linux distribution and has fewer security vulnerabilities
+FROM node:22-slim
+
+WORKDIR /app
+# We are adding the package.json before the run and source code because it's less likely to change
+COPY package*.json .
+
+RUN npm ci
+
+COPY index.js index.js
+
+CMD ["node", "index.js"]
